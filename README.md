@@ -67,11 +67,15 @@ Full spec: [SPEC.md](SPEC.md). Pillar catalog with tiers, boundaries, and sub-pi
 
 ## Standard vs. tooling
 
-The current repo defines the **standard** (the spec, the template, the catalog, the protocol). It's portable: any agent in any tool can read it.
+The repo defines the **standard** at the root (the spec, template, catalog, protocol). It's portable: any agent in any tool can read it.
 
-**Tooling** (a CLI, a Claude Code skill, a Cursor wrapper, etc.) is separate. It automates adoption-friction (bootstrap, archaeology, drift detection, lint) but isn't required to use the standard. When tooling exists, it'll live in this repo under `tooling/<flavor>/` so the standard and its implementations stay version-locked but cleanly bounded.
+**Tooling** (skill bundles, IDE wrappers) lives in [`tooling/`](tooling/). Tooling automates adoption-friction (bootstrap, archaeology, drift detection) but isn't required. The standard works in every major AI coding tool with zero tooling installed.
 
-For now: just the standard. The runtime alignment loop works across every major AI coding tool with no tooling installed.
+Current tooling:
+
+- [`tooling/claude-skill/`](tooling/claude-skill/) — Claude Code skill bundle with `pillars-init`, `pillars-author`, and `pillars-verify`. Drop the directories into your Claude skills folder and invoke via slash command or natural language. See the [tooling README](tooling/claude-skill/README.md) for install.
+
+CLI, Cursor wrapper, and other tooling forms are on the roadmap when adoption signal makes them worth building.
 
 ## Repository layout
 
@@ -93,6 +97,11 @@ pillars/
 ├── examples/           # worked example pillars for adopters
 │   ├── data.md
 │   └── auth.md
+├── tooling/            # tooling forms (skills, future CLI)
+│   └── claude-skill/   # Claude Code skill bundle
+│       ├── pillars-init/
+│       ├── pillars-author/
+│       └── pillars-verify/
 └── DESIGN-NOTES.md     # design conversation log
 ```
 

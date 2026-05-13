@@ -6,6 +6,27 @@ All notable changes to the Pillars standard are documented here. Format follows 
 - **Minor** — backward-compatible additions to schema, protocol, or pillar catalog.
 - **Patch** — clarifications and corrections without behavior changes.
 
+## [0.1.1] - 2026-05-13
+
+First tooling form ships. Standard itself unchanged.
+
+### Added
+
+- **`tooling/claude-skill/`** — Claude Code skill bundle with three skills:
+  - `pillars-init` — bootstrap Pillars in a project. Detects archetype (CLI / SaaS / ML / marketing / mobile / OSS lib / greenfield), drops AGENTS.md, scaffolds `./agents/`, writes stubs, sets archetype-appropriate exclusions with reasons.
+  - `pillars-author` — draft a specific pillar from the codebase. Scans relevant code, presents 8-section draft for user approval before writing.
+  - `pillars-verify` — audit existing pillars against the current codebase. Walks Context-section claims, flags drift with evidence, suggests fixes. Does not auto-fix.
+- **`tooling/claude-skill/README.md`** — install and usage instructions for the skill bundle.
+- README updated to reference the tooling directory and explain the standard-vs-tooling split.
+
+### Notes
+
+- Tooling is optional; the standard works unmodified in every major AI coding tool without it.
+- CLI form is deliberately not included; deferred until clear demand for CI/scripted use.
+- Other tooling forms (Cursor commands, Codex prompts, neutral CLI) may follow when adoption signal warrants.
+
+[0.1.1]: https://github.com/aihxp/pillars/releases/tag/v0.1.1
+
 ## [0.1.0] - 2026-05-13
 
 Initial release. Foundations of the Pillars standard.
