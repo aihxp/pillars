@@ -1,6 +1,6 @@
 # Pillars: Agent Protocol
 
-This project follows the [Pillars](./SPEC.md) standard. Coding agents working in this repository read the pillar files in `./agents/*.md` to stay aligned with the project's facts, decisions, and conventions.
+This project follows the [Pillars](https://github.com/aihxp/pillars) standard. Coding agents working in this repository read the pillar files in `./agents/*.md` to stay aligned with the project's facts, decisions, and conventions.
 
 ## At the start of any task
 
@@ -47,7 +47,8 @@ excluded:
 
 ## Reference
 
-- Pillar files: [`./agents/*.md`](./agents/)
-- Spec: [`./SPEC.md`](./SPEC.md)
-- Pillar enumeration with tiers and boundaries: [`./PILLARS.md`](./PILLARS.md)
-- Worked examples for adopters: [`./examples/`](./examples/)
+- Pillar files in this repo: `./agents/*.md`
+- Pillars standard: https://github.com/aihxp/pillars
+- Spec: https://github.com/aihxp/pillars/blob/main/SPEC.md
+- Pillar enumeration with tiers and boundaries: https://github.com/aihxp/pillars/blob/main/PILLARS.md
+- Worked examples: https://github.com/aihxp/pillars/tree/main/examples
