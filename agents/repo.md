@@ -1,0 +1,81 @@
+---
+pillar: repo
+status: present
+always_load: true
+covers: [file layout, naming conventions, where things go, repository structure]
+triggers: []
+must_read_with: []
+see_also: [context]
+---
+
+## Scope
+
+This pillar covers the file and folder layout of the Pillars repository: where each document lives, what naming convention each file follows, and how the directory structure reflects the standard's own conventions. It does not cover the structure of pillar *content* (that's `SPEC.md`) or the catalog of pillars themselves (that's `PILLARS.md`).
+
+## Context
+
+Pillars is a documentation repository, not a code project. Its layout is intentionally flat at the root with two structural directories:
+
+```
+pillars/
+├── README.md          # human-first intro and adoption guide
+├── SPEC.md            # the formal standard
+├── PILLARS.md         # the pillar enumeration with tiers and boundaries
+├── AGENTS.md          # this project's own AGENTS.md (dogfooded protocol)
+├── LICENSE            # CC0 1.0 dedication
+├── DESIGN-NOTES.md    # the design conversation log
+├── agents/            # this project's pillars (dogfooded)
+│   ├── context.md     # always-loaded
+│   └── repo.md        # always-loaded
+└── examples/          # worked example pillars for adopters
+    ├── data.md
+    └── auth.md
+```
+
+**Naming:**
+
+- Top-level docs use SCREAMING-CASE (`README.md`, `SPEC.md`, `PILLARS.md`, `AGENTS.md`, `LICENSE`, `DESIGN-NOTES.md`). Convention for repo-level documents.
+- Pillar files use lowercase single-word names (`context.md`, `data.md`, `auth.md`). Matches the `pillar:` field in frontmatter.
+- Sub-pillars live in a folder named for the parent (`agents/<parent>/<name>.md`).
+
+**Anchor files:**
+
+- `README.md` is for humans landing on the repo.
+- `SPEC.md` is the canonical standard.
+- `PILLARS.md` is the catalog.
+- `AGENTS.md` is the loader, dogfooded.
+- `agents/` holds the project's own pillars (dogfooded).
+- `examples/` holds worked example pillars for adopters to reference.
+
+## Decisions
+
+- **Flat root layout with two structural directories.** Reason: keeps top-level scannable. Anyone landing on the repo sees the four documents that define the standard (README, SPEC, PILLARS, AGENTS) immediately.
+- **`agents/` for dogfooded pillars; `examples/` for adopter references.** Reason: separates "this project's own pillars" from "pillars an adopter might want to copy." Keeps dogfooding honest while still providing reference material.
+- **SCREAMING-CASE at root, lowercase under `agents/` and `examples/`.** Reason: matches conventional repo expectations (README, LICENSE in caps) while keeping pillar filenames machine-friendly (lowercase matches `pillar:` field).
+- **No `src/`, `tests/`, `docs/`.** Reason: Pillars is a documentation standard, not a software project. Standard-project conventions don't apply.
+
+## Rules
+
+- **Pillar filename must match the `pillar:` frontmatter field.** Loading is path-based; mismatch breaks discovery.
+- **Sub-pillars must live in `agents/<parent>/<name>.md`.** No `parent:` field in frontmatter; the path is the source of truth.
+- **`agents/` and `examples/` are the only structural directories.** Don't introduce new top-level folders without updating this pillar.
+
+## Workflows
+
+- **Adding a new top-level document:** decide if it belongs at root (canonical reference) or under `agents/` (dogfooded pillar) or `examples/` (adopter reference). Use SCREAMING-CASE at root; lowercase elsewhere. Link from `README.md` if it's a canonical reference.
+- **Adding a new dogfooded pillar:** create `agents/<name>.md` with frontmatter and 8-section body. Update `PILLARS.md` if it's a new pillar in the standard's catalog. Cross-link from `README.md` if it changes the high-level shape.
+- **Adding a new sub-pillar:** create `agents/<parent>/<name>.md`. The parent pillar may already exist or be created at the same time.
+
+## Watchouts
+
+- **Don't put adopter-facing pillars in `agents/`.** That directory is for this project's *own* pillars, dogfooded. Adopter references live in `examples/`. Mixing them confuses readers.
+- **Don't rename SCREAMING-CASE docs casually.** Tools, search results, and external links assume conventional names (`README.md`, `LICENSE`).
+- **Don't fragment with deep nesting.** Sub-pillars use one level of nesting (`agents/<parent>/<name>.md`). Deeper nesting was considered and rejected; if a domain needs more depth, it's a sign the parent boundary is wrong.
+
+## Touchpoints
+
+- `see_also: [context]` — repo layout and project identity are tightly related; readers often need both.
+
+## Gaps
+
+- **Whether to add a `tools/` directory** for future Layer 2 (toolkit) work is undecided. Layer 2 is out of scope for v0.1 of the spec; the directory will be added when the toolkit project begins.
