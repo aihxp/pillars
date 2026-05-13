@@ -1,0 +1,68 @@
+name: Feature / Proposal
+description: Propose a new pillar, a new sub-pillar pattern, a new archetype, a boundary refinement, or a structural change.
+title: "[proposal]: "
+labels: ["proposal", "needs-discussion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Pillars treats proposals as RFCs. Concrete proposals with examples get faster traction than abstract ones. Structural changes (template, schema, protocol) expect a multi-week discussion.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of proposal?
+      options:
+        - "New pillar in the catalog (PILLARS.md)"
+        - "New sub-pillar pattern"
+        - "Boundary call refinement between existing pillars"
+        - "New archetype exclusion list"
+        - "New worked example for examples/"
+        - "Structural change: pillar template (8 sections)"
+        - "Structural change: frontmatter schema"
+        - "Structural change: loading protocol"
+        - "Structural change: missing-pillar protocol"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: A concrete failure mode in the current standard, or a missing capability.
+      placeholder: |
+        When adopting Pillars in a serverless project, there's no clear home for cold-start handling rules. They don't fit cleanly in arch.md or deploy.md...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: The proposal
+      description: Be specific. Show the diff or the new content in a code block.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What else did you consider, and why did you reject those?
+    validations:
+      required: true
+
+  - type: textarea
+    id: pressure_test
+    attributes:
+      label: Pressure-test against project archetypes
+      description: |
+        For structural changes, walk this proposal through at least 2 of the archetypes documented in DESIGN-NOTES.md
+        (SaaS dashboard, CLI tool, ML pipeline, marketing site, real-time collab, e-commerce).
+        For new pillars or boundary changes, show how at least 2 different project types would use the new shape.
+
+  - type: textarea
+    id: migration
+    attributes:
+      label: Migration for existing adopters
+      description: For structural changes, how do existing adopters update?

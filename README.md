@@ -1,8 +1,27 @@
 # Pillars
 
+[![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-blue.svg)](LICENSE)
+[![Status: pre-1.0](https://img.shields.io/badge/status-pre--1.0-orange.svg)](CHANGELOG.md)
+[![Spec: v0.1.0](https://img.shields.io/badge/spec-v0.1.0-green.svg)](SPEC.md)
+
 **An open standard for project-specific instructions that keep coding agents aligned.**
 
-Pillars is a decomposed, frontmatter-driven convention for documenting what a coding agent (Claude, Cursor, Copilot, Codex, Aider, others) needs to know about a project before it writes a single line of code. Inspired by [design.md](https://github.com/google-labs-code/design.md), generalized into a tiered set of pillar files plus a thin `AGENTS.md` loader.
+Pillars is a decomposed, frontmatter-driven convention for documenting what a coding agent (Claude Code, Cursor, Copilot, Codex, Gemini, opencode, Aider, others) needs to know about a project before it writes a single line of code. Inspired by [design.md](https://github.com/google-labs-code/design.md), generalized into a tiered set of pillar files plus a thin `AGENTS.md` loader.
+
+## Quick start
+
+In your project root:
+
+```bash
+curl -O https://raw.githubusercontent.com/aihxp/pillars/main/AGENTS.md
+mkdir agents
+```
+
+Then open your coding agent and say:
+
+> *Adopt the Pillars standard. Read SPEC.md and PILLARS.md from https://github.com/aihxp/pillars. Scaffold stubs for the always-loaded pillars (`context.md`, `repo.md`) and any Core pillars that apply to this project.*
+
+That's the install. Five minutes, two commands, one prompt. See [Adoption](#adopting-pillars) below for details.
 
 ## What Pillars solves
 
@@ -20,7 +39,7 @@ Linters and type systems catch some of this. They don't catch *intent*. Pillars 
 - Not a workflow tool. It produces no work; it surfaces context.
 - Not a compliance document. Pillars are briefings, not rulebooks. The agent is trusted by default.
 - Not tool-specific. Any agent that reads markdown and parses YAML can implement it.
-- Not a toolkit (yet). This repo defines the standard. Tooling for bootstrap, generation, and drift detection is a separate future product.
+- Not tooling. This repo defines the standard. Tooling (CLI, skills, IDE wrappers) lives separately, when it exists. See [the tooling philosophy](#standard-vs-tooling).
 
 ## How it works (one minute)
 
@@ -29,45 +48,62 @@ Linters and type systems catch some of this. They don't catch *intent*. Pillars 
 3. When an agent starts a task, it scans the frontmatter, picks the relevant pillars based on the task description, loads them, and follows their content.
 4. Pillars come in tiers: 2 always-loaded, 9 Core, 10 Common, plus open-ended Domain pillars. Most projects use ~10-20 pillars total. Excluded pillars are first-class.
 
-The full spec is in [SPEC.md](SPEC.md). The pillar enumeration with tiers, boundaries, and sub-pillar patterns is in [PILLARS.md](PILLARS.md). This project dogfoods itself: its own [AGENTS.md](AGENTS.md) and [agents/](agents/) demonstrate the standard in use.
+Full spec: [SPEC.md](SPEC.md). Pillar catalog with tiers, boundaries, and sub-pillar patterns: [PILLARS.md](PILLARS.md). FAQ: [FAQ.md](FAQ.md). This project dogfoods itself; the [AGENTS.md](AGENTS.md) and [agents/](agents/) folder demonstrate the standard in use.
 
 ## Adopting Pillars
 
-For a new project:
+### For a new project
 
-1. Copy `AGENTS.md` from this repo into your repo root.
+1. Copy [AGENTS.md](AGENTS.md) from this repo into your repo root.
 2. Create an `agents/` folder.
-3. Start with stubs for the two always-loaded pillars (`context.md`, `repo.md`) and any Core pillars that apply. Reference [examples/](examples/) for shape.
+3. Ask your coding agent to write stubs for the two always-loaded pillars (`context.md`, `repo.md`) and any Core pillars that apply. Reference [examples/](examples/) for shape.
 4. Fill sections as you make decisions. A pillar exists once it has frontmatter and a Scope statement; the rest fills in over time.
 
-For an existing project:
+### For an existing project
 
 1. Copy `AGENTS.md` into your repo root.
-2. The agent will degrade gracefully when pillars are missing: it infers from existing code and states the assumption in its response.
-3. Author pillars from the agent's inferences over time, or generate them with a toolkit (separate future product).
+2. Don't create pillars upfront. The agent will degrade gracefully on absent pillars: it infers from existing code and states the assumption in its response.
+3. As inferences hit edge cases, ask the agent to author the relevant pillar from the codebase.
+
+## Standard vs. tooling
+
+The current repo defines the **standard** (the spec, the template, the catalog, the protocol). It's portable: any agent in any tool can read it.
+
+**Tooling** (a CLI, a Claude Code skill, a Cursor wrapper, etc.) is separate. It automates adoption-friction (bootstrap, archaeology, drift detection, lint) but isn't required to use the standard. When tooling exists, it'll live in this repo under `tooling/<flavor>/` so the standard and its implementations stay version-locked but cleanly bounded.
+
+For now: just the standard. The runtime alignment loop works across every major AI coding tool with no tooling installed.
 
 ## Repository layout
 
 ```
 pillars/
-├── README.md          # this file
-├── SPEC.md            # the formal standard
-├── PILLARS.md         # the pillar enumeration, tiers, boundaries
-├── AGENTS.md          # this project's own AGENTS.md (dogfooded)
-├── agents/            # this project's own pillar files (dogfooded)
+├── README.md           # this file
+├── SPEC.md             # the formal standard
+├── PILLARS.md          # the pillar enumeration: tiers, boundaries, sub-pillar patterns
+├── AGENTS.md           # this project's own AGENTS.md (dogfooded protocol)
+├── FAQ.md              # adoption and usage questions
+├── CONTRIBUTING.md     # how to contribute
+├── CODE_OF_CONDUCT.md  # community standards
+├── SECURITY.md         # security policy
+├── CHANGELOG.md        # version history
+├── LICENSE             # CC0 1.0 Universal
+├── agents/             # this project's own pillar files (dogfooded)
 │   ├── context.md
 │   └── repo.md
-├── examples/          # worked example pillars for adopters
+├── examples/           # worked example pillars for adopters
 │   ├── data.md
 │   └── auth.md
-├── DESIGN-NOTES.md    # design conversation log
-└── LICENSE            # CC0 1.0 Universal
+└── DESIGN-NOTES.md     # design conversation log
 ```
+
+## Status
+
+Pre-1.0. The standard's structure is stable, validated against six hypothetical project archetypes (SaaS dashboard, CLI tool, ML pipeline, marketing site, real-time collab, e-commerce). Guidance and catalog will refine as real adoption surfaces edge cases. See [CHANGELOG.md](CHANGELOG.md) for version history.
+
+## Contributing
+
+Pull requests and proposals are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution model (RFC-style for spec changes, direct PR for typos and examples).
 
 ## License
 
 [CC0 1.0 Universal](LICENSE). Use Pillars freely, in any project, public or private, with or without attribution. The standard wins by being adopted.
-
-## Status
-
-Pre-1.0. The standard's structure is stable (validated against six hypothetical project archetypes); guidance refinements are expected as real adoption surfaces edge cases. Iterations land in [DESIGN-NOTES.md](DESIGN-NOTES.md).

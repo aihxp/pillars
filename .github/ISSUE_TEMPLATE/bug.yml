@@ -1,0 +1,53 @@
+name: Bug / Spec issue
+description: Something in the standard is wrong, contradictory, ambiguous, or out of date.
+title: "[bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Pillars is a standard, so "bugs" are usually ambiguities, contradictions, or out-of-date guidance in the spec. Concrete reproductions help.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What's wrong?
+      description: A concrete description of the issue. Quote the specific text in `SPEC.md` / `PILLARS.md` / `AGENTS.md` if applicable.
+      placeholder: |
+        In SPEC.md section 4.1, the rule about depth-1 loading contradicts the example in section 4.0, which shows...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What would correct behavior look like?
+      description: How should the spec read, or what should the agent do?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What does the current spec say or imply?
+      description: Quote the relevant text and explain the contradiction or ambiguity.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How much does this affect adopters?
+      options:
+        - "Low: typo or minor clarification"
+        - "Medium: ambiguity that could lead to misadoption"
+        - "High: contradiction or rule that breaks the standard's promises"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Project type, AI tool you're using, anything else relevant.

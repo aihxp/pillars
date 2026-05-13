@@ -1,0 +1,32 @@
+name: Question
+description: Ask a question about adopting or using Pillars.
+title: "[question]: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before opening: check [FAQ.md](https://github.com/aihxp/pillars/blob/main/FAQ.md) and [SPEC.md](https://github.com/aihxp/pillars/blob/main/SPEC.md). If your answer isn't there, ask away.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: Be as specific as you can. Concrete examples help.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: |
+        What kind of project? Which AI tool(s)? Have you adopted Pillars yet, or are you evaluating?
+    validations:
+      required: false
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: What you've already tried or read
+      description: Pointers to what you've already considered helps avoid retreading ground.
