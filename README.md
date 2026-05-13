@@ -69,13 +69,22 @@ Full spec: [SPEC.md](SPEC.md). Pillar catalog with tiers, boundaries, and sub-pi
 
 The repo defines the **standard** at the root (the spec, template, catalog, protocol). It's portable: any agent in any tool can read it.
 
-**Tooling** (skill bundles, IDE wrappers) lives in [`tooling/`](tooling/). Tooling automates adoption-friction (bootstrap, archaeology, drift detection) but isn't required. The standard works in every major AI coding tool with zero tooling installed.
+**Tooling** lives in [`tooling/`](tooling/). It automates the meta-operations (bootstrap, authoring, drift detection) but isn't required. The standard works in every major AI coding tool with zero tooling installed.
 
-Current tooling:
+### Multi-tool support
 
-- [`tooling/claude-skill/`](tooling/claude-skill/) — Claude Code skill bundle with `pillars-init`, `pillars-author`, and `pillars-verify`. Drop the directories into your Claude skills folder and invoke via slash command or natural language. See the [tooling README](tooling/claude-skill/README.md) for install.
+Tooling ships in two forms, with broad coverage:
 
-CLI, Cursor wrapper, and other tooling forms are on the roadmap when adoption signal makes them worth building.
+| Form | Tools | Where |
+|---|---|---|
+| Native skill bundle | Claude Code | [`tooling/claude-skill/`](tooling/claude-skill/) |
+| Universal prompts + per-tool install guides | Cursor, Codex CLI, Gemini CLI, opencode, Aider, Windsurf, Cline, Continue, and any other AI tool | [`tooling/prompts/`](tooling/prompts/) |
+
+Both forms drive the same three operations: **init** (bootstrap Pillars in a project), **author** (draft a pillar from the codebase), **verify** (audit pillars against current code).
+
+Pick your tool's install doc in [`tooling/prompts/`](tooling/prompts/) for one-paragraph setup instructions, or paste a prompt file directly into your tool's chat to run the operation.
+
+CLI, deeper per-tool wrappers, and CI integrations are roadmap items for when adoption signal warrants them.
 
 ## Repository layout
 
@@ -97,11 +106,16 @@ pillars/
 ├── examples/           # worked example pillars for adopters
 │   ├── data.md
 │   └── auth.md
-├── tooling/            # tooling forms (skills, future CLI)
-│   └── claude-skill/   # Claude Code skill bundle
-│       ├── pillars-init/
-│       ├── pillars-author/
-│       └── pillars-verify/
+├── tooling/            # tooling forms (skills, universal prompts)
+│   ├── claude-skill/   # Claude Code native skill bundle
+│   │   ├── pillars-init/
+│   │   ├── pillars-author/
+│   │   └── pillars-verify/
+│   └── prompts/        # Universal paste-in prompts + per-tool install guides
+│       ├── pillars-init.md
+│       ├── pillars-author.md
+│       ├── pillars-verify.md
+│       └── install-{cursor,codex-cli,gemini-cli,opencode,aider,windsurf,cline,continue}.md
 └── DESIGN-NOTES.md     # design conversation log
 ```
 

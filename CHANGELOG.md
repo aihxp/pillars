@@ -6,6 +6,29 @@ All notable changes to the Pillars standard are documented here. Format follows 
 - **Minor** — backward-compatible additions to schema, protocol, or pillar catalog.
 - **Patch** — clarifications and corrections without behavior changes.
 
+## [0.1.2] - 2026-05-13
+
+Multi-tool tooling support. Standard itself unchanged.
+
+### Added
+
+- **`tooling/prompts/`** — universal paste-in prompts that drive the same three operations as the Claude Code skill, but work in any AI coding tool:
+  - `pillars-init.md` — tool-agnostic version of the init procedure.
+  - `pillars-author.md` — tool-agnostic version of the author procedure. Pillar name supplied at the bottom of the prompt.
+  - `pillars-verify.md` — tool-agnostic version of the verify procedure.
+- **Per-tool install guides** under `tooling/prompts/install-*.md` for: Cursor, Codex CLI, Gemini CLI, opencode, Aider, Windsurf, Cline, Continue. Each covers runtime alignment (how the tool reads AGENTS.md) and meta-operation invocation (native commands where supported, paste-in where not).
+- **`tooling/README.md`** — umbrella intro to all tooling forms with a tool-to-form matrix.
+- **`tooling/prompts/README.md`** — how to use the universal prompts.
+- README updated to highlight multi-tool support.
+
+### Notes
+
+- Universal prompts and the Claude Code skill drive the same three procedures. Both forms should be updated together when procedures change.
+- For tools beyond the eight with install docs (e.g., Pieces, Pi Coder, future tools), the universal prompts work via paste-in. No per-tool wrapper is required for the operations to function.
+- CLI still deliberately not included. Roadmap item for v0.2+ when CI demand surfaces.
+
+[0.1.2]: https://github.com/aihxp/pillars/releases/tag/v0.1.2
+
 ## [0.1.1] - 2026-05-13
 
 First tooling form ships. Standard itself unchanged.
