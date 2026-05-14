@@ -3,6 +3,9 @@
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-blue.svg)](LICENSE)
 [![Status: stable 1.0](https://img.shields.io/badge/status-stable%201.0-green.svg)](CHANGELOG.md)
 [![Spec: v1.0.0](https://img.shields.io/badge/spec-v1.0.0-green.svg)](SPEC.md)
+[![AGENTS.md: compatible](https://img.shields.io/badge/AGENTS.md-compatible-purple.svg)](AGENTS.md)
+[![Tooling: optional](https://img.shields.io/badge/tooling-optional-lightgrey.svg)](tooling/)
+[![Tool: agnostic](https://img.shields.io/badge/tool-agnostic-blue.svg)](FAQ.md#how-is-this-different-from-cursor-rules-windsurfrules-etc)
 
 **An open standard for project-specific instructions that keep coding agents aligned.**
 
