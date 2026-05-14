@@ -9,6 +9,7 @@ Northstar CRM is a multi-tenant B2B dashboard for account teams. It uses Next.js
 ```text
 saas-dashboard/
 ├── AGENTS.md
+├── design.md           # optional rich product design brief
 └── agents/
     ├── context.md
     ├── repo.md
@@ -40,6 +41,33 @@ After Pillars, the same task loads:
 - `data.md` through `auth.md`'s `must_read_with`, because invite state is tenant-scoped data.
 
 The agent now sees that permissions belong at the route boundary, tenant-scoped tables carry `tenant_id`, and unresolved SSO policy is a gap to ask about.
+
+## Where design.md Fits
+
+If Northstar CRM had a root `design.md`, it would hold the richer product story: target users, account-team journeys, navigation rationale, and UX tradeoffs. The pillars would not duplicate that whole narrative. They would summarize only the durable implementation guidance agents need during tasks.
+
+For example:
+
+| `design.md` content | Pillars destination |
+|---|---|
+| Account-team workflow narrative | `context.md` summary of product language and invariants |
+| Workspace switcher UX rationale | `ui.md` if present, or a gap until UI rules are authored |
+| Owner-only invite journey | `auth.md` rules and workflow |
+| Tenant isolation experience | `data.md` and `auth.md` constraints |
+
+Use `pillars-sync-design.md` to compare both directions. It reports proposed updates from `design.md` into pillars and from pillars back into `design.md`, but it does not write files.
+
+## Useful Maintenance Prompts
+
+This example is small, but the report-only prompts show how an adopter would maintain it:
+
+| Prompt | Example use |
+|---|---|
+| `pillars-map-task.md` | Map "Add an owner-only team invite link" to `context`, `repo`, `auth`, and `data` |
+| `pillars-find-gaps.md` | Surface SSO, background job layout, and soft-delete policy as open questions |
+| `pillars-trim.md` | Check whether `auth.md` and `data.md` duplicate tenant-scoping guidance |
+| `pillars-sync-readme.md` | Compare the public README for Northstar CRM with `context.md` and `repo.md` |
+| `pillars-sync-prd.md` | Compare a product requirements doc for team invites with `auth.md` and `data.md` |
 
 ## Example Task Routing
 

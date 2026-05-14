@@ -36,7 +36,7 @@ Yes. The 4-state missing-pillar protocol handles incomplete adoption gracefully:
 
 ### How does this work for a monorepo?
 
-The current standard is single-repo. For monorepos, the simplest pattern is one set of pillars at the monorepo root, with sub-pillars or domain pillars distinguishing per-app concerns (e.g., `agents/data.md` covers shared schema; `agents/data/orders.md` covers an orders-app-specific table). A more elaborate per-app `AGENTS.md` is possible but not part of the standard yet. Cross-package conventions are a v0.2+ topic.
+The 1.0.0 standard is single-repo. For monorepos, the simplest pattern is one set of pillars at the monorepo root, with sub-pillars or domain pillars distinguishing per-app concerns (e.g., `agents/data.md` covers shared schema; `agents/data/orders.md` covers an orders-app-specific table). A more elaborate per-app `AGENTS.md` is possible but not part of the standard yet. Cross-package conventions are a future minor-version topic.
 
 ### Can pillars cover non-code concerns (legal, compliance, business rules)?
 
@@ -66,6 +66,25 @@ A CLI would help with: CI/CD checks (lint, drift detection), one-command bootstr
 
 Use [`tooling/prompts/pillars-check.md`](tooling/prompts/pillars-check.md). Paste it into your AI coding tool and it will check frontmatter, required headings, floor pillars, references, and exclusions. It does not install anything and it does not audit whether pillar claims match code; use `pillars-verify.md` for drift.
 
+### What report-only maintenance prompts exist?
+
+The prompt set includes small workflows that inspect and report without writing files:
+
+| Prompt | Job |
+|---|---|
+| `pillars-map-task.md` | Show which pillars should load for a task and why |
+| `pillars-find-gaps.md` | Index unresolved `Gaps` across pillars |
+| `pillars-trim.md` | Flag bloat, duplication, and over-prescription |
+| `pillars-sync-design.md` | Reconcile root `design.md` with Pillars |
+| `pillars-sync-prd.md` | Reconcile PRDs or requirements docs with Pillars |
+| `pillars-sync-readme.md` | Reconcile README with Pillars |
+
+### How does Pillars work with design.md?
+
+Use `design.md` as the rich design brief and Pillars as task-routed operating memory. Root `design.md` is best for product intent, user journeys, UX rationale, and design narrative. Pillars are best for durable facts, constraints, decisions, workflows, watchouts, and gaps that agents need during implementation.
+
+Do not auto-sync them silently. Use [`tooling/prompts/pillars-sync-design.md`](tooling/prompts/pillars-sync-design.md) to produce a reconciliation report. It identifies `design.md -> pillars` updates, `pillars -> design.md` updates, and conflicts that need a human decision.
+
 ### Do tooling updates change compatibility?
 
 Only changes to [SPEC.md](SPEC.md) change what it means to be Pillars-compatible. Prompt, skill, install-guide, and example updates can improve adoption without changing the standard. `CHANGELOG.md` labels tooling-only releases as "Standard itself unchanged."
@@ -88,9 +107,9 @@ It's the smallest set that covers both *briefing* (Scope, Context, Decisions) an
 
 Visual hierarchy is self-documenting. `./agents/data/migrations.md` is obviously a sub-pillar of `data`. Frontmatter would require opening the file to learn the same fact. Hugo, Jekyll, Astro, MkDocs, and every static site generator use folders for hierarchy; the pattern is conventional.
 
-### Why no "tooling" in v0.1?
+### Why is tooling optional?
 
-Standards succeed by being portable and small. Tooling is a force multiplier, not a substitute. v0.1 ships the standard alone so adoption isn't gated on which tooling form you use. Tooling lands in `tooling/<flavor>/` (CLI, Claude Code skill, Cursor wrapper) when the friction it would relieve is well-understood.
+Standards succeed by being portable and small. Tooling is a force multiplier, not a substitute. Pillars 1.0.0 defines compatibility through markdown files and loading behavior, so adoption is not gated on which tooling form you use. Optional tooling lives under `tooling/` when the friction it relieves is well-understood.
 
 ### Can I version pillars within a project?
 
@@ -122,7 +141,7 @@ Slowly. Major versions are years apart by design. Minor versions are quarterly o
 
 ### Is this stable enough to adopt?
 
-The standard's *structure* is stable (validated against six hypothetical project archetypes). The *catalog* and *guidance* will refine as real adoption surfaces edge cases. v0.1 is suitable for adoption; expect minor refinements in v0.2.
+Yes. Pillars 1.0.0 marks the AGENTS.md protocol, `agents/` layout, frontmatter schema, loading behavior, and missing-pillar behavior as stable. The catalog and guidance can still refine through backward-compatible minor releases as real adoption surfaces edge cases.
 
 ### How do I report a problem?
 

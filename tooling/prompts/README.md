@@ -1,6 +1,6 @@
 # Universal Prompts
 
-Tool-agnostic prompts that drive the Pillars meta-operations (check, init, author, verify) in any AI coding tool. Paste the relevant prompt into your tool's chat to run the procedure.
+Tool-agnostic prompts that drive Pillars meta-operations in any AI coding tool. Paste the relevant prompt into your tool's chat to run the procedure.
 
 These work in: Claude Code, Cursor, Codex CLI, Gemini CLI, opencode, Aider, Windsurf, Cline, Continue, Pieces, and anything else that can read a project and write files based on instructions.
 
@@ -11,9 +11,15 @@ If your tool has a native command/skill format, see the `tooling/<tool>/` direct
 | File | When to use |
 |---|---|
 | [`pillars-check.md`](pillars-check.md) | Validate Pillars file structure, frontmatter, section order, floor pillars, and references. Does not audit code drift. |
+| [`pillars-find-gaps.md`](pillars-find-gaps.md) | Index unresolved `Gaps` across pillars and classify their implementation impact. |
 | [`pillars-init.md`](pillars-init.md) | Bootstrap Pillars in a new or existing project. Detects archetype, drops AGENTS.md, scaffolds stubs, sets exclusions. |
 | [`pillars-author.md`](pillars-author.md) | Draft or revise a specific pillar from the codebase. Scans relevant code, presents 8-section draft for approval. |
+| [`pillars-map-task.md`](pillars-map-task.md) | Map a task to the pillars that should load and explain why. |
 | [`pillars-verify.md`](pillars-verify.md) | Audit pillars against current code. Flags drift with evidence, suggests fixes. Manual lightweight check. |
+| [`pillars-sync-design.md`](pillars-sync-design.md) | Reconcile root `design.md` with Pillars. Reports proposed updates in both directions without writing files. |
+| [`pillars-sync-prd.md`](pillars-sync-prd.md) | Reconcile PRDs or requirements docs with Pillars. |
+| [`pillars-sync-readme.md`](pillars-sync-readme.md) | Reconcile README with Pillars. |
+| [`pillars-trim.md`](pillars-trim.md) | Review pillars for bloat, duplication, and over-prescription. |
 
 ## How to use
 
@@ -40,7 +46,7 @@ For tools where the universal prompts are the recommended integration:
 | Cline | [install-cline.md](install-cline.md) |
 | Continue | [install-continue.md](install-continue.md) |
 
-For Claude Code, prefer the native skill bundle in [../claude-skill/](../claude-skill/) for init, author, and verify. Use `pillars-check.md` directly when you want the prompt-only structural check.
+For Claude Code, prefer the native skill bundle in [../claude-skill/](../claude-skill/) for init, author, and verify. Use the prompt files directly for the smaller report-only workflows.
 
 ## Why these are separate from the Claude Code skill
 
@@ -48,7 +54,7 @@ The Claude Code skill (`tooling/claude-skill/`) packages selected procedures as 
 
 The universal prompts here are the same procedures formatted as paste-in instructions, with no tool-specific framing. They're slightly more verbose (because they include orientation that a native skill takes for granted) but they work everywhere.
 
-The Claude Code skill bundle packages init, author, and verify as native skills. `pillars-check.md` is prompt-only for now, because structural validation should stay available without adding a CLI or another native packaging surface.
+The Claude Code skill bundle packages init, author, and verify as native skills. The smaller report-only workflows are prompt-only for now, because they should stay available without adding a CLI or another native packaging surface.
 
 ## Drift between forms
 

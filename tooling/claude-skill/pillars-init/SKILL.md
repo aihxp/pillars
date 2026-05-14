@@ -5,7 +5,7 @@ version: 0.1.0
 updated: 2026-05-13
 compatible_with:
   - claude-code
-standard_version: ">=0.1.0"
+standard_version: ">=1.0.0"
 ---
 
 # Pillars Init
@@ -291,7 +291,7 @@ If yes, transition to `pillars-author` for `context`. If no, end.
 
 - **Wrong archetype guess.** If detection is ambiguous, *ask* before writing. Better to clarify than to write the wrong exclusion set.
 - **Project has a hand-built `CLAUDE.md` or `.cursorrules`.** Do not delete these. Instead, note them in the summary and recommend the user reduce them to a redirect: `"See AGENTS.md and the pillars in ./agents/."`
-- **User wants to adopt for a sub-package in a monorepo.** Pillars v0.1 is single-repo. If the user is in a monorepo, ask whether they want root-level adoption (covers the monorepo) or to wait for the multi-repo guidance in a future spec version.
+- **User wants to adopt for a sub-package in a monorepo.** Pillars 1.0.0 is single-repo. If the user is in a monorepo, ask whether they want root-level adoption (covers the monorepo) or to wait for the multi-repo guidance in a future spec version.
 
 ## Reference
 

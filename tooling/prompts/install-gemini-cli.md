@@ -24,7 +24,7 @@ Read `AGENTS.md` at the repo root and follow its protocol to load the relevant p
 
 The agent reads `GEMINI.md`, sees the redirect, and proceeds via `AGENTS.md`.
 
-## Running the meta-operations (check / init / author / verify)
+## Running the prompt workflows
 
 ### Option A: Gemini CLI commands (if supported in your version)
 
@@ -38,9 +38,15 @@ cp tooling/prompts/pillars-init.md ~/.gemini/commands/pillars-init.md
 cp tooling/prompts/pillars-author.md ~/.gemini/commands/pillars-author.md
 cp tooling/prompts/pillars-verify.md ~/.gemini/commands/pillars-verify.md
 cp tooling/prompts/pillars-check.md ~/.gemini/commands/pillars-check.md
+cp tooling/prompts/pillars-sync-design.md ~/.gemini/commands/pillars-sync-design.md
+cp tooling/prompts/pillars-sync-prd.md ~/.gemini/commands/pillars-sync-prd.md
+cp tooling/prompts/pillars-sync-readme.md ~/.gemini/commands/pillars-sync-readme.md
+cp tooling/prompts/pillars-map-task.md ~/.gemini/commands/pillars-map-task.md
+cp tooling/prompts/pillars-find-gaps.md ~/.gemini/commands/pillars-find-gaps.md
+cp tooling/prompts/pillars-trim.md ~/.gemini/commands/pillars-trim.md
 ```
 
-Then invoke via `/pillars-check`, `/pillars-init`, etc. in Gemini chat.
+Then invoke via matching slash commands such as `/pillars-check`, `/pillars-map-task`, and `/pillars-sync-readme` in Gemini chat.
 
 If your version uses a different command format (e.g., TOML with frontmatter), adapt the prompt content into that shape; the body stays the same.
 

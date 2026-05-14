@@ -1,10 +1,10 @@
 # Pillars Tooling
 
-Tooling forms that automate the Pillars meta-operations (bootstrap, authoring, verification, and structural checks) across AI coding tools.
+Tooling forms that automate Pillars meta-operations across AI coding tools.
 
 The **standard** itself ships separately as portable markdown ([SPEC.md](../SPEC.md), [PILLARS.md](../PILLARS.md), [AGENTS.md](../AGENTS.md)). It works in every major AI coding tool with **zero tooling installed**: the runtime alignment loop is just the tool reading `AGENTS.md` and following its protocol.
 
-Tooling is optional. Use it when the meta-operations (creating pillars, drafting from code, checking for drift, checking structure) get tedious to do by hand.
+Tooling is optional. Use it when meta-operations like creating pillars, drafting from code, checking drift, mapping tasks, finding gaps, trimming bloat, or reconciling external docs get tedious to do by hand.
 
 ## What's here
 
@@ -16,9 +16,15 @@ tooling/
 │   └── pillars-verify/
 └── prompts/                # Universal paste-in prompts + per-tool install guides
     ├── pillars-check.md
+    ├── pillars-find-gaps.md
     ├── pillars-init.md
     ├── pillars-author.md
+    ├── pillars-map-task.md
     ├── pillars-verify.md
+    ├── pillars-sync-design.md
+    ├── pillars-sync-prd.md
+    ├── pillars-sync-readme.md
+    ├── pillars-trim.md
     ├── install-cursor.md
     ├── install-codex-cli.md
     ├── install-gemini-cli.md
@@ -52,16 +58,22 @@ tooling/
 
 ## Prompt operations
 
-The universal prompts implement four procedures:
+The universal prompts implement these procedures:
 
 | Operation | Job |
 |---|---|
 | **check** | Validate Pillars file structure, frontmatter, section order, floor pillars, and references |
+| **find-gaps** | Index unresolved `Gaps` across pillars and classify their impact |
 | **init** | Bootstrap Pillars: detect archetype, drop AGENTS.md, scaffold `agents/`, write stubs, set exclusions |
 | **author** | Draft a specific pillar from the codebase via targeted archaeology, present 8-section draft for approval |
+| **map-task** | Explain which pillars load for a task and why |
 | **verify** | Audit pillars against current code, flag drift with evidence, suggest fixes (no auto-fix) |
+| **sync-design** | Reconcile root `design.md` with Pillars and report proposed updates in both directions |
+| **sync-prd** | Reconcile PRDs or requirements docs with Pillars |
+| **sync-readme** | Reconcile README with Pillars |
+| **trim** | Report bloat, duplication, and over-prescription in pillars |
 
-The Claude Code skill bundle currently packages the three higher-touch procedures: init, author, and verify. `pillars-check.md` is intentionally prompt-only for now: it gives adopters a structural validation path without introducing a CLI or another native tool surface.
+The Claude Code skill bundle currently packages the three higher-touch procedures: init, author, and verify. The smaller report-only workflows are intentionally prompt-only for now: they give adopters useful checks without introducing a CLI or another native tool surface.
 
 ## Why no CLI
 

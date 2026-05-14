@@ -23,7 +23,7 @@ Continue prepends this to every chat. The agent then reads AGENTS.md as part of 
 
 In Continue's chat, manually include AGENTS.md and the relevant pillars via `@<file>` references.
 
-## Running the meta-operations (check / init / author / verify)
+## Running the prompt workflows
 
 Continue supports custom slash commands via `.continue/config.json`'s `slashCommands` array. To register the Pillars meta-operations:
 
@@ -34,6 +34,36 @@ Continue supports custom slash commands via `.continue/config.json`'s `slashComm
       "name": "pillars-check",
       "description": "Check Pillars file structure",
       "prompt": "<paste the entire content of pillars-check.md here>"
+    },
+    {
+      "name": "pillars-sync-design",
+      "description": "Reconcile design.md and Pillars",
+      "prompt": "<paste the entire content of pillars-sync-design.md here>"
+    },
+    {
+      "name": "pillars-sync-prd",
+      "description": "Reconcile requirements docs and Pillars",
+      "prompt": "<paste the entire content of pillars-sync-prd.md here>"
+    },
+    {
+      "name": "pillars-sync-readme",
+      "description": "Reconcile README and Pillars",
+      "prompt": "<paste the entire content of pillars-sync-readme.md here>"
+    },
+    {
+      "name": "pillars-map-task",
+      "description": "Map a task to Pillars",
+      "prompt": "<paste the entire content of pillars-map-task.md here>"
+    },
+    {
+      "name": "pillars-find-gaps",
+      "description": "Index unresolved Pillars gaps",
+      "prompt": "<paste the entire content of pillars-find-gaps.md here>"
+    },
+    {
+      "name": "pillars-trim",
+      "description": "Review Pillars for bloat",
+      "prompt": "<paste the entire content of pillars-trim.md here>"
     },
     {
       "name": "pillars-init",
@@ -54,7 +84,7 @@ Continue supports custom slash commands via `.continue/config.json`'s `slashComm
 }
 ```
 
-Then invoke via `/pillars-check`, `/pillars-init`, etc. in Continue's chat.
+Then invoke via matching slash commands such as `/pillars-check`, `/pillars-map-task`, and `/pillars-sync-readme` in Continue's chat.
 
 Alternative: paste the prompts into chat directly without registering commands. The paste-in path always works.
 

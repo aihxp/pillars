@@ -13,7 +13,7 @@ Once your project has `AGENTS.md` and `agents/` at the root, opencode will:
 
 No opencode-specific configuration required.
 
-## Running the meta-operations (check / init / author / verify)
+## Running the prompt workflows
 
 opencode supports custom commands and agents via `.opencode/` configuration. To install Pillars meta-operations as opencode commands:
 
@@ -27,9 +27,15 @@ cp tooling/prompts/pillars-init.md .opencode/commands/pillars-init.md
 cp tooling/prompts/pillars-author.md .opencode/commands/pillars-author.md
 cp tooling/prompts/pillars-verify.md .opencode/commands/pillars-verify.md
 cp tooling/prompts/pillars-check.md .opencode/commands/pillars-check.md
+cp tooling/prompts/pillars-sync-design.md .opencode/commands/pillars-sync-design.md
+cp tooling/prompts/pillars-sync-prd.md .opencode/commands/pillars-sync-prd.md
+cp tooling/prompts/pillars-sync-readme.md .opencode/commands/pillars-sync-readme.md
+cp tooling/prompts/pillars-map-task.md .opencode/commands/pillars-map-task.md
+cp tooling/prompts/pillars-find-gaps.md .opencode/commands/pillars-find-gaps.md
+cp tooling/prompts/pillars-trim.md .opencode/commands/pillars-trim.md
 ```
 
-Then invoke via `/pillars-check`, `/pillars-init`, etc. Adapt the file format (frontmatter, extension) to match your opencode version's expectations.
+Then invoke via matching slash commands such as `/pillars-check`, `/pillars-map-task`, and `/pillars-sync-readme`. Adapt the file format (frontmatter, extension) to match your opencode version's expectations.
 
 ### Option B: paste into chat (always works)
 

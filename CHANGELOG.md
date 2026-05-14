@@ -6,6 +6,31 @@ All notable changes to the Pillars standard are documented here. Format follows 
 - **Minor** — backward-compatible additions to schema, protocol, or pillar catalog.
 - **Patch** — clarifications and corrections without behavior changes.
 
+## [Unreleased]
+
+No unreleased changes.
+
+## [1.0.0] - 2026-05-14
+
+Stable standard release. No breaking schema or loading-protocol changes from 0.1.x.
+
+### Added
+
+- **`tooling/prompts/pillars-sync-design.md`**: paste-in reconciliation report for projects that use both root `design.md` and Pillars. It reports `design.md -> pillars`, `pillars -> design.md`, and conflict findings without writing files.
+- **`tooling/prompts/pillars-sync-prd.md`**: paste-in reconciliation report for product requirements documents and Pillars.
+- **`tooling/prompts/pillars-map-task.md`**: paste-in report that maps a task to its Pillars load set and explains why each pillar loads.
+- **`tooling/prompts/pillars-find-gaps.md`**: paste-in project-level index of unresolved `Gaps` across pillars.
+- **`tooling/prompts/pillars-trim.md`**: paste-in report for bloat, duplication, and over-prescription in pillars.
+- **`tooling/prompts/pillars-sync-readme.md`**: paste-in reconciliation report for README and Pillars.
+
+### Changed
+
+- Promoted the Pillars specification to 1.0.0 to mark the AGENTS.md protocol, `agents/` layout, frontmatter schema, depth-1 loading behavior, and missing-pillar protocol as stable.
+- README and FAQ now describe Pillars as stable 1.0.0 instead of pre-1.0.
+- README, FAQ, tooling docs, install guides, and the SaaS example now document the expanded report-only prompt set.
+
+[1.0.0]: https://github.com/aihxp/pillars/releases/tag/v1.0.0
+
 ## [0.1.3] - 2026-05-14
 
 Standard itself unchanged.

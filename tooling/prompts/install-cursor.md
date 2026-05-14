@@ -4,7 +4,7 @@ Cursor has good native support for project-level rules and custom commands. Two 
 
 ## Option A: Project rule + paste-in prompts (recommended for v0.1)
 
-Add a Cursor rule that ensures the agent reads AGENTS.md on every interaction. Then paste the prompts from this folder when you want to run check / init / author / verify.
+Add a Cursor rule that ensures the agent reads AGENTS.md on every interaction. Then paste the prompts from this folder when you want to run a Pillars workflow.
 
 1. In your project, create `.cursor/rules/pillars.mdc`:
 
@@ -20,7 +20,7 @@ This project follows the [Pillars](https://github.com/aihxp/pillars) standard. B
 Do not infer conventions when a relevant pillar exists; consult the pillar. Do not silently ignore a `Gaps` entry; ask the user instead.
 ```
 
-2. To run the meta-operations, open `pillars-check.md`, `pillars-init.md`, `pillars-author.md`, or `pillars-verify.md` in this folder, copy the content, and paste it into Cursor's chat. The agent will follow the procedure.
+2. To run a workflow, open the relevant `pillars-*.md` prompt in this folder, copy the content, and paste it into Cursor's chat. The agent will follow the procedure.
 
 ## Option B: Cursor Commands (optional, cleaner UX)
 
@@ -39,9 +39,15 @@ cp tooling/prompts/pillars-init.md .cursor/commands/pillars-init.md
 cp tooling/prompts/pillars-author.md .cursor/commands/pillars-author.md
 cp tooling/prompts/pillars-verify.md .cursor/commands/pillars-verify.md
 cp tooling/prompts/pillars-check.md .cursor/commands/pillars-check.md
+cp tooling/prompts/pillars-sync-design.md .cursor/commands/pillars-sync-design.md
+cp tooling/prompts/pillars-sync-prd.md .cursor/commands/pillars-sync-prd.md
+cp tooling/prompts/pillars-sync-readme.md .cursor/commands/pillars-sync-readme.md
+cp tooling/prompts/pillars-map-task.md .cursor/commands/pillars-map-task.md
+cp tooling/prompts/pillars-find-gaps.md .cursor/commands/pillars-find-gaps.md
+cp tooling/prompts/pillars-trim.md .cursor/commands/pillars-trim.md
 ```
 
-3. Restart Cursor or reload the workspace. The commands will be available via `/pillars-check`, `/pillars-init`, `/pillars-author`, `/pillars-verify` in chat.
+3. Restart Cursor or reload the workspace. The commands will be available via matching slash commands such as `/pillars-check`, `/pillars-map-task`, and `/pillars-sync-readme`.
 
 Note: Cursor's command format is evolving. If your version uses a different file structure (e.g., `.mdc` extension with frontmatter), wrap each prompt's content with the expected frontmatter block. The command body itself is the prompt content unchanged.
 

@@ -1,8 +1,8 @@
 # Pillars
 
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-blue.svg)](LICENSE)
-[![Status: pre-1.0](https://img.shields.io/badge/status-pre--1.0-orange.svg)](CHANGELOG.md)
-[![Spec: v0.1.0](https://img.shields.io/badge/spec-v0.1.0-green.svg)](SPEC.md)
+[![Status: stable 1.0](https://img.shields.io/badge/status-stable%201.0-green.svg)](CHANGELOG.md)
+[![Spec: v1.0.0](https://img.shields.io/badge/spec-v1.0.0-green.svg)](SPEC.md)
 
 **An open standard for project-specific instructions that keep coding agents aligned.**
 
@@ -80,7 +80,7 @@ Tooling ships in two forms, with broad coverage:
 | Native skill bundle | Claude Code | [`tooling/claude-skill/`](tooling/claude-skill/) |
 | Universal prompts + per-tool install guides | Cursor, Codex CLI, Gemini CLI, opencode, Aider, Windsurf, Cline, Continue, and any other AI tool | [`tooling/prompts/`](tooling/prompts/) |
 
-The prompt form now covers four operations: **init** (bootstrap Pillars in a project), **author** (draft a pillar from the codebase), **verify** (audit pillars against current code), and **check** (validate Pillars file structure without installing a CLI).
+The prompt form covers optional report-first workflows for bootstrap, authoring, verification, structural checks, task routing, gap indexing, trimming, and reconciliation with design, product, and README documents.
 
 Pick your tool's install doc in [`tooling/prompts/`](tooling/prompts/) for one-paragraph setup instructions, or paste a prompt file directly into your tool's chat to run the operation.
 
@@ -91,6 +91,12 @@ CLI, deeper per-tool wrappers, and CI integrations are roadmap items for when ad
 Pillars-compatible means compatible with the standard in [SPEC.md](SPEC.md): the `AGENTS.md` protocol, `agents/` layout, frontmatter schema, loading behavior, and missing-pillar behavior. Tooling changes do not change project compatibility unless `SPEC.md` changes.
 
 Repository releases may include standard changes, tooling changes, or both. The changelog labels tooling-only releases as "Standard itself unchanged" so adopters know whether they need to update their project files.
+
+### design.md interop
+
+Pillars was inspired by the same pattern that made `design.md` useful: durable, agent-readable project intent in markdown. They fit together cleanly when `design.md` remains the rich design brief and Pillars becomes the task-routed operating memory.
+
+Use root `design.md` for product intent, user journeys, UX rationale, and design narrative. Use `agents/*.md` for the durable facts, decisions, constraints, and gaps agents need while implementing specific tasks. The [`pillars-sync-design.md`](tooling/prompts/pillars-sync-design.md) prompt compares both directions and reports proposed updates without writing files.
 
 ## Repository layout
 
@@ -120,16 +126,22 @@ pillars/
 │   │   └── pillars-verify/
 │   └── prompts/        # Universal paste-in prompts + per-tool install guides
 │       ├── pillars-check.md
+│       ├── pillars-find-gaps.md
 │       ├── pillars-init.md
 │       ├── pillars-author.md
+│       ├── pillars-map-task.md
 │       ├── pillars-verify.md
+│       ├── pillars-sync-prd.md
+│       ├── pillars-sync-readme.md
+│       ├── pillars-sync-design.md
+│       ├── pillars-trim.md
 │       └── install-{cursor,codex-cli,gemini-cli,opencode,aider,windsurf,cline,continue}.md
 └── DESIGN-NOTES.md     # design conversation log
 ```
 
 ## Status
 
-Pre-1.0. The standard's structure is stable, validated against six hypothetical project archetypes (SaaS dashboard, CLI tool, ML pipeline, marketing site, real-time collab, e-commerce). Guidance and catalog will refine as real adoption surfaces edge cases. See [CHANGELOG.md](CHANGELOG.md) for version history.
+Stable 1.0.0. The standard's structure is stable, validated against six hypothetical project archetypes (SaaS dashboard, CLI tool, ML pipeline, marketing site, real-time collab, e-commerce) and expanded with report-only maintenance workflows for task routing, gaps, trimming, and external-doc reconciliation. Guidance and catalog can still refine through backward-compatible minor releases as real adoption surfaces edge cases. See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 ## Contributing
 

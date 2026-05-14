@@ -24,7 +24,7 @@ Do not infer conventions when a relevant pillar exists. Do not silently ignore a
 
 Windsurf will load `.windsurfrules` as system context; the agent then proceeds via AGENTS.md.
 
-## Running the meta-operations (check / init / author / verify)
+## Running the prompt workflows
 
 Windsurf doesn't have a persistent custom-command format as of v0.1. Use paste-in:
 

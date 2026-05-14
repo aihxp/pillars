@@ -5,7 +5,7 @@ version: 0.1.0
 updated: 2026-05-13
 compatible_with:
   - claude-code
-standard_version: ">=0.1.0"
+standard_version: ">=1.0.0"
 ---
 
 # Pillars Verify

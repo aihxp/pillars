@@ -10,6 +10,7 @@ Thank you for considering a contribution. Pillars is a standard, not a code proj
 | New pillars in the catalog | `PILLARS.md` | RFC-style issue first; PR after discussion |
 | New worked examples | `examples/` | PR directly; reviewed for quality and accuracy |
 | End-to-end adoption examples | `examples/<archetype>/` | PR directly; keep them compact and realistic |
+| Tooling prompts | `tooling/prompts/` | PR directly for prompt-only workflows; keep them report-first unless writes are explicitly user-approved |
 | Boundary call refinements | `PILLARS.md` | Issue first to discuss the boundary; PR after agreement |
 | Archetype exclusion lists | `PILLARS.md` | PR directly; new archetypes welcome |
 | Sub-pillar patterns | `PILLARS.md` | Issue first to discuss; PR after |

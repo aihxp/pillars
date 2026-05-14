@@ -42,7 +42,7 @@ This project follows the [Pillars](https://github.com/aihxp/pillars) standard.
 Read `AGENTS.md` at the repo root and follow its protocol to load the relevant pillars from `./agents/*.md` before doing any work.
 ```
 
-## Running the meta-operations (check / init / author / verify)
+## Running the prompt workflows
 
 Aider doesn't have persistent slash commands beyond its built-ins. Use paste-in:
 
