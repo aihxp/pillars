@@ -48,7 +48,7 @@ Linters and type systems catch some of this. They don't catch *intent*. Pillars 
 3. When an agent starts a task, it scans the frontmatter, picks the relevant pillars based on the task description, loads them, and follows their content.
 4. Pillars come in tiers: 2 always-loaded, 9 Core, 10 Common, plus open-ended Domain pillars. Most projects use ~10-20 pillars total. Excluded pillars are first-class.
 
-Full spec: [SPEC.md](SPEC.md). Pillar catalog with tiers, boundaries, and sub-pillar patterns: [PILLARS.md](PILLARS.md). FAQ: [FAQ.md](FAQ.md). This project dogfoods itself; the [AGENTS.md](AGENTS.md) and [agents/](agents/) folder demonstrate the standard in use.
+Full spec: [SPEC.md](SPEC.md). Pillar catalog with tiers, boundaries, and sub-pillar patterns: [PILLARS.md](PILLARS.md). FAQ: [FAQ.md](FAQ.md). This project dogfoods itself; the [AGENTS.md](AGENTS.md) and [agents/](agents/) folder demonstrate the standard in use. For a compact end-to-end adoption example, see [examples/saas-dashboard/](examples/saas-dashboard/).
 
 ## Adopting Pillars
 
@@ -80,11 +80,17 @@ Tooling ships in two forms, with broad coverage:
 | Native skill bundle | Claude Code | [`tooling/claude-skill/`](tooling/claude-skill/) |
 | Universal prompts + per-tool install guides | Cursor, Codex CLI, Gemini CLI, opencode, Aider, Windsurf, Cline, Continue, and any other AI tool | [`tooling/prompts/`](tooling/prompts/) |
 
-Both forms drive the same three operations: **init** (bootstrap Pillars in a project), **author** (draft a pillar from the codebase), **verify** (audit pillars against current code).
+The prompt form now covers four operations: **init** (bootstrap Pillars in a project), **author** (draft a pillar from the codebase), **verify** (audit pillars against current code), and **check** (validate Pillars file structure without installing a CLI).
 
 Pick your tool's install doc in [`tooling/prompts/`](tooling/prompts/) for one-paragraph setup instructions, or paste a prompt file directly into your tool's chat to run the operation.
 
 CLI, deeper per-tool wrappers, and CI integrations are roadmap items for when adoption signal warrants them.
+
+### Versioning note
+
+Pillars-compatible means compatible with the standard in [SPEC.md](SPEC.md): the `AGENTS.md` protocol, `agents/` layout, frontmatter schema, loading behavior, and missing-pillar behavior. Tooling changes do not change project compatibility unless `SPEC.md` changes.
+
+Repository releases may include standard changes, tooling changes, or both. The changelog labels tooling-only releases as "Standard itself unchanged" so adopters know whether they need to update their project files.
 
 ## Repository layout
 
@@ -105,13 +111,15 @@ pillars/
 │   └── repo.md
 ├── examples/           # worked example pillars for adopters
 │   ├── data.md
-│   └── auth.md
+│   ├── auth.md
+│   └── saas-dashboard/ # compact end-to-end adoption example
 ├── tooling/            # tooling forms (skills, universal prompts)
 │   ├── claude-skill/   # Claude Code native skill bundle
 │   │   ├── pillars-init/
 │   │   ├── pillars-author/
 │   │   └── pillars-verify/
 │   └── prompts/        # Universal paste-in prompts + per-tool install guides
+│       ├── pillars-check.md
 │       ├── pillars-init.md
 │       ├── pillars-author.md
 │       ├── pillars-verify.md

@@ -1,15 +1,16 @@
 # Universal Prompts
 
-Tool-agnostic prompts that drive the Pillars meta-operations (init, author, verify) in any AI coding tool. Paste the relevant prompt into your tool's chat to run the procedure.
+Tool-agnostic prompts that drive the Pillars meta-operations (check, init, author, verify) in any AI coding tool. Paste the relevant prompt into your tool's chat to run the procedure.
 
 These work in: Claude Code, Cursor, Codex CLI, Gemini CLI, opencode, Aider, Windsurf, Cline, Continue, Pieces, and anything else that can read a project and write files based on instructions.
 
 If your tool has a native command/skill format, see the `tooling/<tool>/` directory (when available) for tighter integration. For now, the universal prompts are the broadest-compatibility option.
 
-## The three prompts
+## The prompts
 
 | File | When to use |
 |---|---|
+| [`pillars-check.md`](pillars-check.md) | Validate Pillars file structure, frontmatter, section order, floor pillars, and references. Does not audit code drift. |
 | [`pillars-init.md`](pillars-init.md) | Bootstrap Pillars in a new or existing project. Detects archetype, drops AGENTS.md, scaffolds stubs, sets exclusions. |
 | [`pillars-author.md`](pillars-author.md) | Draft or revise a specific pillar from the codebase. Scans relevant code, presents 8-section draft for approval. |
 | [`pillars-verify.md`](pillars-verify.md) | Audit pillars against current code. Flags drift with evidence, suggests fixes. Manual lightweight check. |
@@ -39,19 +40,19 @@ For tools where the universal prompts are the recommended integration:
 | Cline | [install-cline.md](install-cline.md) |
 | Continue | [install-continue.md](install-continue.md) |
 
-For Claude Code, prefer the native skill bundle in [../claude-skill/](../claude-skill/) over the universal prompts.
+For Claude Code, prefer the native skill bundle in [../claude-skill/](../claude-skill/) for init, author, and verify. Use `pillars-check.md` directly when you want the prompt-only structural check.
 
 ## Why these are separate from the Claude Code skill
 
-The Claude Code skill (`tooling/claude-skill/`) packages the same procedures as Claude Code skill files with proper frontmatter, triggers, and slash-command invocation. That packaging is tool-specific.
+The Claude Code skill (`tooling/claude-skill/`) packages selected procedures as Claude Code skill files with proper frontmatter, triggers, and slash-command invocation. That packaging is tool-specific.
 
 The universal prompts here are the same procedures formatted as paste-in instructions, with no tool-specific framing. They're slightly more verbose (because they include orientation that a native skill takes for granted) but they work everywhere.
 
-Both forms drive the same underlying procedure. The Claude Code skill is sugar; the universal prompts are the substance.
+The Claude Code skill bundle packages init, author, and verify as native skills. `pillars-check.md` is prompt-only for now, because structural validation should stay available without adding a CLI or another native packaging surface.
 
 ## Drift between forms
 
-If a procedural update happens, both forms should be updated together. The repository's CI (or a future Layer 2 toolkit check) may eventually enforce parity. For now, treat the procedures as canonically defined here in the prompts; the Claude Code skill mirrors them.
+If a procedural update happens, matching prompt and skill forms should be updated together when both exist. For now, treat the procedures as canonically defined here in the prompts; the Claude Code skill mirrors the procedures it packages.
 
 ## Reference
 

@@ -9,6 +9,7 @@ Thank you for considering a contribution. Pillars is a standard, not a code proj
 | Specification clarifications | `SPEC.md` | Open an issue first if the change is non-trivial; PR for typos and direct fixes |
 | New pillars in the catalog | `PILLARS.md` | RFC-style issue first; PR after discussion |
 | New worked examples | `examples/` | PR directly; reviewed for quality and accuracy |
+| End-to-end adoption examples | `examples/<archetype>/` | PR directly; keep them compact and realistic |
 | Boundary call refinements | `PILLARS.md` | Issue first to discuss the boundary; PR after agreement |
 | Archetype exclusion lists | `PILLARS.md` | PR directly; new archetypes welcome |
 | Sub-pillar patterns | `PILLARS.md` | Issue first to discuss; PR after |
@@ -52,6 +53,8 @@ Pillars uses [Semantic Versioning](https://semver.org/):
 
 The current version is in `CHANGELOG.md`.
 
+Tooling-only releases may update prompts, skills, install guides, or examples without changing Pillars compatibility. When the standard itself is unchanged, say so clearly in `CHANGELOG.md`.
+
 ## Style and tone
 
 Pillars values *briefing tone*: conversational, declarative, reasoned, what an experienced engineer would tell a new contributor on day one. Spec and pillar text should not read like compliance documentation.
@@ -63,7 +66,7 @@ Concrete guidance:
 - **Tight examples.** Inline, minimal, just enough to ground the rule.
 - **No bullet-list theater.** If a list is fewer than three items, prose is usually better.
 
-## Pillar quality bar (for `examples/` contributions)
+## Example quality bar
 
 Worked example pillars must:
 
@@ -71,6 +74,13 @@ Worked example pillars must:
 - Include a representative frontmatter block.
 - Be a realistic, *not* a sanitized, set of facts. Show the messy real-world choices, not generic textbook conventions.
 - Carry a header note: `> This is a worked example for adopters to reference. Replace this content with your project's actual conventions when adopting.`
+
+End-to-end adoption examples must:
+
+- Include an `AGENTS.md` and a small `agents/` folder.
+- Show at least one always-loaded pillar and one task-routed pillar.
+- Explain how a realistic task maps to a load set.
+- Stay compact enough to read in one sitting.
 
 ## What we won't accept
 

@@ -6,6 +6,22 @@ All notable changes to the Pillars standard are documented here. Format follows 
 - **Minor** — backward-compatible additions to schema, protocol, or pillar catalog.
 - **Patch** — clarifications and corrections without behavior changes.
 
+## [0.1.3] - 2026-05-14
+
+Standard itself unchanged.
+
+### Added
+
+- **`tooling/prompts/pillars-check.md`**: paste-in structural conformance check for frontmatter, required sections, floor pillars, references, and exclusions. This gives adopters a no-CLI validation path.
+- **`examples/saas-dashboard/`**: compact end-to-end adoption example with `AGENTS.md`, always-loaded pillars, task-routed pillars, and example task loading behavior.
+
+### Changed
+
+- Dogfooded `agents/context.md` and `agents/repo.md` now reflect the current repository shape, including optional tooling.
+- README, FAQ, and contributing docs now clarify that standard compatibility is defined by `SPEC.md`; tooling-only releases do not change compatibility.
+
+[0.1.3]: https://github.com/aihxp/pillars/releases/tag/v0.1.3
+
 ## [0.1.2] - 2026-05-13
 
 Multi-tool tooling support. Standard itself unchanged.

@@ -14,22 +14,31 @@ This pillar covers the file and folder layout of the Pillars repository: where e
 
 ## Context
 
-Pillars is a documentation repository, not a code project. Its layout is intentionally flat at the root with two structural directories:
+Pillars is a documentation repository, not an application codebase. Its layout is intentionally flat at the root with three visible structural directories:
 
 ```
 pillars/
-├── README.md          # human-first intro and adoption guide
-├── SPEC.md            # the formal standard
-├── PILLARS.md         # the pillar enumeration with tiers and boundaries
-├── AGENTS.md          # this project's own AGENTS.md (dogfooded protocol)
-├── LICENSE            # CC0 1.0 dedication
-├── DESIGN-NOTES.md    # the design conversation log
-├── agents/            # this project's pillars (dogfooded)
-│   ├── context.md     # always-loaded
-│   └── repo.md        # always-loaded
-└── examples/          # worked example pillars for adopters
-    ├── data.md
-    └── auth.md
+├── README.md           # human-first intro and adoption guide
+├── SPEC.md             # the formal standard
+├── PILLARS.md          # the pillar enumeration with tiers and boundaries
+├── AGENTS.md           # this project's own AGENTS.md, dogfooded protocol
+├── FAQ.md              # adoption and usage questions
+├── CONTRIBUTING.md     # contribution process
+├── CODE_OF_CONDUCT.md  # community standards
+├── SECURITY.md         # security policy
+├── CHANGELOG.md        # standard and tooling release notes
+├── LICENSE             # CC0 1.0 dedication
+├── DESIGN-NOTES.md     # design conversation log
+├── agents/             # this project's pillars, dogfooded
+│   ├── context.md      # always-loaded
+│   └── repo.md         # always-loaded
+├── examples/           # adopter-facing examples
+│   ├── data.md
+│   ├── auth.md
+│   └── saas-dashboard/ # compact end-to-end adoption example
+└── tooling/            # optional prompts and skill packaging
+    ├── prompts/
+    └── claude-skill/
 ```
 
 **Naming:**
@@ -45,12 +54,15 @@ pillars/
 - `PILLARS.md` is the catalog.
 - `AGENTS.md` is the loader, dogfooded.
 - `agents/` holds the project's own pillars (dogfooded).
-- `examples/` holds worked example pillars for adopters to reference.
+- `examples/` holds worked example pillars and compact adoption examples for adopters to reference.
+- `tooling/` holds optional helper forms. It is outside the runtime standard; it packages meta-operations such as init, author, verify, and structural checks.
+- `.github/` holds repository hosting metadata such as issue templates and PR templates. It is not part of the Pillars standard.
 
 ## Decisions
 
-- **Flat root layout with two structural directories.** Reason: keeps top-level scannable. Anyone landing on the repo sees the four documents that define the standard (README, SPEC, PILLARS, AGENTS) immediately.
+- **Flat root layout with three visible structural directories.** Reason: keeps top-level scannable. Anyone landing on the repo sees the documents that define the standard (README, SPEC, PILLARS, AGENTS) immediately, while examples and optional tooling stay grouped.
 - **`agents/` for dogfooded pillars; `examples/` for adopter references.** Reason: separates "this project's own pillars" from "pillars an adopter might want to copy." Keeps dogfooding honest while still providing reference material.
+- **`tooling/` for optional helper forms.** Reason: prompts and skills make meta-operations easier, but the standard must remain usable without installing anything.
 - **SCREAMING-CASE at root, lowercase under `agents/` and `examples/`.** Reason: matches conventional repo expectations (README, LICENSE in caps) while keeping pillar filenames machine-friendly (lowercase matches `pillar:` field).
 - **No `src/`, `tests/`, `docs/`.** Reason: Pillars is a documentation standard, not a software project. Standard-project conventions don't apply.
 
@@ -58,13 +70,14 @@ pillars/
 
 - **Pillar filename must match the `pillar:` frontmatter field.** Loading is path-based; mismatch breaks discovery.
 - **Sub-pillars must live in `agents/<parent>/<name>.md`.** No `parent:` field in frontmatter; the path is the source of truth.
-- **`agents/` and `examples/` are the only structural directories.** Don't introduce new top-level folders without updating this pillar.
+- **`agents/`, `examples/`, and `tooling/` are the only visible structural directories.** Don't introduce new top-level folders without updating this pillar. Hidden repository metadata such as `.github/` is allowed when it supports project hosting.
 
 ## Workflows
 
 - **Adding a new top-level document:** decide if it belongs at root (canonical reference) or under `agents/` (dogfooded pillar) or `examples/` (adopter reference). Use SCREAMING-CASE at root; lowercase elsewhere. Link from `README.md` if it's a canonical reference.
 - **Adding a new dogfooded pillar:** create `agents/<name>.md` with frontmatter and 8-section body. Update `PILLARS.md` if it's a new pillar in the standard's catalog. Cross-link from `README.md` if it changes the high-level shape.
 - **Adding a new sub-pillar:** create `agents/<parent>/<name>.md`. The parent pillar may already exist or be created at the same time.
+- **Adding a new tooling form:** place it under `tooling/<form>/` or `tooling/prompts/`, document it in `tooling/README.md`, and keep the standard documents clear that tooling is optional.
 
 ## Watchouts
 
@@ -78,4 +91,4 @@ pillars/
 
 ## Gaps
 
-- **Whether to add a `tools/` directory** for future Layer 2 (toolkit) work is undecided. Layer 2 is out of scope for v0.1 of the spec; the directory will be added when the toolkit project begins.
+(none)

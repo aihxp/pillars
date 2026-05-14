@@ -1,0 +1,54 @@
+# SaaS Dashboard Adoption Example
+
+This folder is a compact end-to-end example of Pillars in a fictional SaaS dashboard project called Northstar CRM. It is not a template to copy byte-for-byte. It shows how a real adoption feels once `AGENTS.md` and several pillars work together.
+
+## Project Snapshot
+
+Northstar CRM is a multi-tenant B2B dashboard for account teams. It uses Next.js, Postgres, Drizzle, Better-Auth, and Vercel. The example includes the minimum set of files needed to demonstrate the runtime loop:
+
+```text
+saas-dashboard/
+├── AGENTS.md
+└── agents/
+    ├── context.md
+    ├── repo.md
+    ├── auth.md
+    └── data.md
+```
+
+## What This Demonstrates
+
+- Always-loaded pillars: `context.md` and `repo.md`.
+- Task-routed pillars: `auth.md` and `data.md`.
+- Depth-1 `must_read_with`: auth and data load together because tenant isolation spans both.
+- `see_also` as a soft hint, not an automatic chain walk.
+- Gaps that tell the agent when to ask instead of inventing a policy.
+
+## Before And After
+
+Before Pillars, an agent asked to add "team invite links" might:
+
+- Put invite state in a generic `users` table because it saw user records first.
+- Skip tenant scoping on the invite lookup.
+- Add permission checks inside a database helper because it seemed locally convenient.
+
+After Pillars, the same task loads:
+
+- `context.md` for product language: tenant, workspace, account team.
+- `repo.md` for where route handlers and database helpers live.
+- `auth.md` because the task mentions invites, users, roles, and permissions.
+- `data.md` through `auth.md`'s `must_read_with`, because invite state is tenant-scoped data.
+
+The agent now sees that permissions belong at the route boundary, tenant-scoped tables carry `tenant_id`, and unresolved SSO policy is a gap to ask about.
+
+## Example Task Routing
+
+| Task | Primary pillars | Additional load |
+|---|---|---|
+| "Add an owner-only team invite link" | `auth` | `data` via `must_read_with`; `repo` and `context` always load |
+| "Add `last_contacted_at` to accounts" | `data` | `auth` via `must_read_with`; `repo` and `context` always load |
+| "Move account pages into a new route group" | none in this example | `repo` and `context` always load; a real app would likely add `ui.md` |
+
+## Why It Is Small
+
+This example intentionally stops before a full production pillar set. A real SaaS dashboard would likely add `stack.md`, `api.md`, `ui.md`, `quality.md`, `deploy.md`, `observe.md`, `config.md`, and `security.md`. The goal here is to show the end-to-end loading behavior without drowning the reader in a fake application.

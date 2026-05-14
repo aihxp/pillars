@@ -23,13 +23,18 @@ Continue prepends this to every chat. The agent then reads AGENTS.md as part of 
 
 In Continue's chat, manually include AGENTS.md and the relevant pillars via `@<file>` references.
 
-## Running the meta-operations (init / author / verify)
+## Running the meta-operations (check / init / author / verify)
 
 Continue supports custom slash commands via `.continue/config.json`'s `slashCommands` array. To register the Pillars meta-operations:
 
 ```json
 {
   "slashCommands": [
+    {
+      "name": "pillars-check",
+      "description": "Check Pillars file structure",
+      "prompt": "<paste the entire content of pillars-check.md here>"
+    },
     {
       "name": "pillars-init",
       "description": "Bootstrap Pillars in this project",
@@ -49,7 +54,7 @@ Continue supports custom slash commands via `.continue/config.json`'s `slashComm
 }
 ```
 
-Then invoke via `/pillars-init` etc. in Continue's chat.
+Then invoke via `/pillars-check`, `/pillars-init`, etc. in Continue's chat.
 
 Alternative: paste the prompts into chat directly without registering commands. The paste-in path always works.
 

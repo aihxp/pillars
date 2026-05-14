@@ -13,7 +13,7 @@ Once your project has `AGENTS.md` and `agents/` at the root, opencode will:
 
 No opencode-specific configuration required.
 
-## Running the meta-operations (init / author / verify)
+## Running the meta-operations (check / init / author / verify)
 
 opencode supports custom commands and agents via `.opencode/` configuration. To install Pillars meta-operations as opencode commands:
 
@@ -26,9 +26,10 @@ mkdir -p .opencode/commands
 cp tooling/prompts/pillars-init.md .opencode/commands/pillars-init.md
 cp tooling/prompts/pillars-author.md .opencode/commands/pillars-author.md
 cp tooling/prompts/pillars-verify.md .opencode/commands/pillars-verify.md
+cp tooling/prompts/pillars-check.md .opencode/commands/pillars-check.md
 ```
 
-Then invoke via `/pillars-init` etc. Adapt the file format (frontmatter, extension) to match your opencode version's expectations.
+Then invoke via `/pillars-check`, `/pillars-init`, etc. Adapt the file format (frontmatter, extension) to match your opencode version's expectations.
 
 ### Option B: paste into chat (always works)
 

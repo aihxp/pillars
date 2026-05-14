@@ -62,6 +62,14 @@ No, not for the runtime alignment loop (the daily use). The standard ships as ma
 
 A CLI would help with: CI/CD checks (lint, drift detection), one-command bootstrap from a clean terminal, and as the engine for per-tool skills. None of these are required to adopt the standard. See [README.md](README.md) for the phased rollout philosophy.
 
+### How do I check structure without a CLI?
+
+Use [`tooling/prompts/pillars-check.md`](tooling/prompts/pillars-check.md). Paste it into your AI coding tool and it will check frontmatter, required headings, floor pillars, references, and exclusions. It does not install anything and it does not audit whether pillar claims match code; use `pillars-verify.md` for drift.
+
+### Do tooling updates change compatibility?
+
+Only changes to [SPEC.md](SPEC.md) change what it means to be Pillars-compatible. Prompt, skill, install-guide, and example updates can improve adoption without changing the standard. `CHANGELOG.md` labels tooling-only releases as "Standard itself unchanged."
+
 ### Can I adopt incrementally?
 
 Yes. Start with the two always-loaded pillars (`context.md`, `repo.md`). Add Tier 1 pillars as the corresponding decisions get made. Add Tier 2 and Domain pillars when they're load-bearing for your project. Stubs and exclusions are first-class.

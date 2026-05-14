@@ -22,7 +22,7 @@ Before doing any code work, read `AGENTS.md` at the project root and follow its 
 Do not infer conventions when a relevant pillar exists. Do not silently ignore a Gaps entry; ask the user.
 ```
 
-## Running the meta-operations (init / author / verify)
+## Running the meta-operations (check / init / author / verify)
 
 Cline supports custom workflows in some versions. For broad compatibility, use paste-in:
 

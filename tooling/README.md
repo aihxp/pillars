@@ -1,10 +1,10 @@
 # Pillars Tooling
 
-Tooling forms that automate the Pillars meta-operations (bootstrap, authoring, verification) across AI coding tools.
+Tooling forms that automate the Pillars meta-operations (bootstrap, authoring, verification, and structural checks) across AI coding tools.
 
 The **standard** itself ships separately as portable markdown ([SPEC.md](../SPEC.md), [PILLARS.md](../PILLARS.md), [AGENTS.md](../AGENTS.md)). It works in every major AI coding tool with **zero tooling installed**: the runtime alignment loop is just the tool reading `AGENTS.md` and following its protocol.
 
-Tooling is optional. Use it when the meta-operations (creating pillars, drafting from code, checking for drift) get tedious to do by hand.
+Tooling is optional. Use it when the meta-operations (creating pillars, drafting from code, checking for drift, checking structure) get tedious to do by hand.
 
 ## What's here
 
@@ -15,6 +15,7 @@ tooling/
 │   ├── pillars-author/
 │   └── pillars-verify/
 └── prompts/                # Universal paste-in prompts + per-tool install guides
+    ├── pillars-check.md
     ├── pillars-init.md
     ├── pillars-author.md
     ├── pillars-verify.md
@@ -49,27 +50,28 @@ tooling/
 2. Read the install doc for your tool.
 3. Use the meta-operation prompts (or skill, in Claude Code) to bootstrap and maintain pillars.
 
-## Two forms, same procedure
+## Prompt operations
 
-The Claude Code skill bundle and the universal prompts implement the same three procedures:
+The universal prompts implement four procedures:
 
 | Operation | Job |
 |---|---|
+| **check** | Validate Pillars file structure, frontmatter, section order, floor pillars, and references |
 | **init** | Bootstrap Pillars: detect archetype, drop AGENTS.md, scaffold `agents/`, write stubs, set exclusions |
 | **author** | Draft a specific pillar from the codebase via targeted archaeology, present 8-section draft for approval |
 | **verify** | Audit pillars against current code, flag drift with evidence, suggest fixes (no auto-fix) |
 
-The Claude Code skill is sugar (proper skill format, slash command invocation). The universal prompts are the substance (procedures that work in any AI coding tool by paste).
+The Claude Code skill bundle currently packages the three higher-touch procedures: init, author, and verify. `pillars-check.md` is intentionally prompt-only for now: it gives adopters a structural validation path without introducing a CLI or another native tool surface.
 
 ## Why no CLI
 
-A CLI would be the right shape for CI/CD checks (lint, drift detection in PR gates). It's deliberately not in this release because:
+A CLI could eventually be the right shape for CI/CD checks (lint, drift detection in PR gates). It is deliberately not in this release because:
 
 1. The runtime alignment loop doesn't need a CLI; every AI tool already reads AGENTS.md.
 2. Meta-operations work cleanly through the AI tool itself (skill or paste-in prompt).
-3. CI integration is a separate use case with its own design (deterministic checks, no LLM calls). Belongs in v0.2 or later when there's clear demand.
+3. CI integration is a separate use case with its own design (deterministic checks, no LLM calls). It belongs later, if demand proves it is worth the extra product surface.
 
-If you want to use Pillars in CI today, write a workflow that pipes the verify prompt to your AI CLI of choice. A native CLI will come when warranted.
+If you want a lightweight check today, use `tooling/prompts/pillars-check.md` inside your AI tool. It reports structural issues without installing anything and without creating a command-line product.
 
 ## Why no full per-tool wrappers
 

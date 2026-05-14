@@ -13,13 +13,13 @@ Once your project has `AGENTS.md` and `agents/` at the root, Codex CLI will:
 
 No Codex-specific configuration is required.
 
-## Running the meta-operations (init / author / verify)
+## Running the meta-operations (check / init / author / verify)
 
 Codex CLI doesn't have a persistent custom-command system in v0.1, so you invoke meta-operations by pasting the prompt content:
 
 ### Option A: paste into chat
 
-1. Open `pillars-init.md`, `pillars-author.md`, or `pillars-verify.md` from this folder.
+1. Open `pillars-check.md`, `pillars-init.md`, `pillars-author.md`, or `pillars-verify.md` from this folder.
 2. Copy its content.
 3. Paste into your Codex CLI chat.
 4. The agent follows the procedure.
